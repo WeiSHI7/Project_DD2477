@@ -30,7 +30,7 @@ def scrape_urls(url):
         # something went wrong with accessing the website
         # TODO maybe fix a better error message
 
-        print(URL)
+        print(url)
         print(page.status_code)
 
     return urls
