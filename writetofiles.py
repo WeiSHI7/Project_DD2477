@@ -8,6 +8,7 @@ def write_data(filepath, urls):
             information = scrape_page(url)
             bookid = information["bookid"]
             info_records[bookid] = information
+            print(type(info_records))
 
         file.write(json.dumps(info_records))   
 

@@ -38,7 +38,8 @@ def scrape_page(url):
         genres = set([elem.text for elem in genres])
         genres = list(genres)
 
-        information["soup"] = soup
+
+        # information["soup"] = soup
         information["bookid"] = bookid
         information["title"] = title
         information["author"] = author
