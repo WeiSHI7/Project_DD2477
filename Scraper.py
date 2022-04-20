@@ -40,7 +40,6 @@ def scrape_page(url):
         genres = list(genres)
 
         # Adds the retrieved information into the data structure
-        information["soup"] = soup
         information["bookid"] = bookid
         information["title"] = title
         information["author"] = author
