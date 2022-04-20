@@ -6,13 +6,14 @@ from bs4 import BeautifulSoup
 # page = requests.get(URL)
 
 
+# Takes an url for a book-page on goodreads and returns a dict with all the meta data
 def scrape_page(url):
 
     information = dict()
 
     page = requests.get(url)
 
-    if (page.status_code == 200) :
+    if (page.status_code == 200) : # success!
 
         soup = BeautifulSoup(page.content, "html.parser")
 
@@ -38,6 +39,7 @@ def scrape_page(url):
         genres = set([elem.text for elem in genres])
         genres = list(genres)
 
+        # Adds the retrieved information into the data structure
         information["soup"] = soup
         information["bookid"] = bookid
         information["title"] = title
@@ -50,6 +52,9 @@ def scrape_page(url):
         information["genres"] = genres
 
     else:
+
+        # Something went wrong when accessing the website
+        # TODO maybe fix a better error message
 
         print(url)
         print(page.status_code)
