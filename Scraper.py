@@ -1,16 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
 
-data_file = 
-URL = "https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"
+# URL = "https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"
 
-page = requests.get(URL)
+# page = requests.get(URL)
 
 
 def scrape_page(url):
 
     information = dict()
+
+    page = requests.get(url)
 
     if (page.status_code == 200) :
 
@@ -51,18 +51,20 @@ def scrape_page(url):
 
     else:
 
-        print(URL)
+        print(url)
         print(page.status_code)
 
     return information
 
 
 
-if __name__ ==  __main__:
+# if __name__ == "__main__":
 
-    with 
+#     data_file = "books_information.json"
+#     urls = ["https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"]
 
-    for url in urls:
-        information = scrape_page(url)
+#     write_data(data_file, urls)
+#     # for url in urls:
+#     #     information = scrape_page(url)
 
 
