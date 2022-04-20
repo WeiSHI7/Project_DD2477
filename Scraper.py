@@ -11,11 +11,13 @@ def scrape_page(url):
     information = dict()
 
     page = requests.get(url)
+    soup = BeautifulSoup(page.content, "html.parser")
 
-    if (page.status_code == 200) : # success!
+    if (soup.find(id="book_id") != None) : # success!
 
-        soup = BeautifulSoup(page.content, "html.parser")
+        # soup = BeautifulSoup(page.content, "html.parser")
 
+        print(soup.find(id="book_id"))
         # Gets the specific information for the book
         bookid = soup.find(id="book_id")["value"]
 
