@@ -1,9 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
-# URL = "https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"
+#URL = "https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"
 
-# page = requests.get(URL)
 
 
 # Takes an url for a book-page on goodreads and returns a dict with all the meta data
@@ -64,13 +63,12 @@ def scrape_page(url):
 
 
 
-# if __name__ == "__main__":
+#if __name__ == "__main__":
 
-#     data_file = "books_information.json"
-#     urls = ["https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"]
+#    data_file = "books_information.json"
+#    urls = ["https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird"]
 
-#     write_data(data_file, urls)
-#     # for url in urls:
-#     #     information = scrape_page(url)
+#    scrape_page(URL)
+
 
 
