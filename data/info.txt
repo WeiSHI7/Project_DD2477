@@ -5,16 +5,16 @@ The numbered files contain parts of this file, in chunks of 1000 (in order to sc
 SCRAPED SITES:
 
 Wei:
-[] url1
-[] url2
-[] url3
+[ ] url1
+[ ] url2
+[ ] url3
 Olivia:
-[] url4
-[] url5
-[] url6
+[x] url4
+[ ] url5
+[ ] url6
 Philipe:
-[] url7
-[] url8
+[ ] url7
+[ ] url8
 Pedro:
-[] url9
-[] url10
+[ ] url9
+[ ] url10

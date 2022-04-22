@@ -35,9 +35,9 @@ def load_urls(filepath):
 
 if __name__ == "__main__":
 
-    urls_file = "data/urls_test.txt"
-    failed_file = "data/failed_test.txt"
-    data_file = "data/books_information_test.json"
+    urls_file = "data/urls4.txt"
+    failed_file = "data/failed_4.txt"
+    data_file = "data/books_information_4.json"
 
     urls = load_urls(urls_file)
     write_data(data_file, failed_file, urls)
