@@ -10,8 +10,8 @@ Wei:
 [ ] url3
 Olivia:
 [x] url4
-[ ] url5
-[ ] url6
+[x] url5
+[x] url6
 Philipe:
 [ ] url7
 [ ] url8
