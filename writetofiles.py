@@ -39,5 +39,6 @@ if __name__ == "__main__":
     failed_file = "data/failed_8.txt"
     data_file = "data/books_information_8.json"
 
+
     urls = load_urls(urls_file)
     write_data(data_file, failed_file, urls)
