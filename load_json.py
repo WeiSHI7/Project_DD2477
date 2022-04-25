@@ -22,7 +22,7 @@ def merge_json_files(dirpath):
 
 # filepath = "data/books_information_1.json"
 
-es = Elasticsearch(scheme="http", timeout=40)
+es = Elasticsearch(scheme="http", timeout=150)
 
 # with open(filepath, "r") as filejson:
 #     nodes = json.load(filejson)
