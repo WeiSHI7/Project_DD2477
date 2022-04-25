@@ -2,7 +2,7 @@ import json
 from elasticsearch import Elasticsearch, helpers
 
 
-filepath = "data\books_information_1.json"
+filepath = "data/books_information_1.json"
 
 es = Elasticsearch(scheme="http")
 
