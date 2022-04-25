@@ -4,7 +4,7 @@ from elasticsearch import Elasticsearch, helpers
 
 filepath = "data\books_information_1.json"
 
-es = Elasticsearch([{'host':'localhost', 'port': 9200}], scheme="http")
+es = Elasticsearch(scheme="http")
 
 with open(filepath, "r") as filejson:
     nodes = json.load(filejson)
