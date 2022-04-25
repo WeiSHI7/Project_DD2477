@@ -20,7 +20,7 @@ def merge_json_files(dirpath):
     return nodes
 
 
-filepath = "data/json_files_final/books_information_10.json"
+filepath = "data\json_files_final\books_information_failed_1-2.json"
 
 es = Elasticsearch(scheme="http", timeout=150)
 
