@@ -19,7 +19,7 @@ with open(filepath, "r") as filejson:
     {
     "_index" : "nodes_bulk",
     "_type" : "external",
-    "_id" : int(node['bookid']),
+    "_id" : node['bookid'],
     "_source" : node
     }
     for node in nodes
