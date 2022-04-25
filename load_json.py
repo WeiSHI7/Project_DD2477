@@ -38,8 +38,8 @@ nodes = merge_json_files(dirpath)
 
 actions = [
 {
-"_index" : "nodes_bulk",
-"_type" : "external",
+"_index" : "books_goodreads",
+"_type" : "book",
 "_id" : node['bookid'],
 "_source" : node
 }
