@@ -1,4 +1,6 @@
 import json
+
+from sympy import pprint_use_unicode
 from elasticsearch import Elasticsearch, helpers
 
 
@@ -7,7 +9,7 @@ filepath = "data/books_information_1.json"
 es = Elasticsearch(scheme="http")
 
 with open(filepath, "r") as filejson:
-    nodes = json.loads(filejson)
+    nodes = json.load(filejson)
 
 
     # for node in nodes:
@@ -18,7 +20,7 @@ with open(filepath, "r") as filejson:
     {
     "_index" : "nodes_bulk",
     "_type" : "external",
-    "_id" : node['bookid'],
+    "_id" : int(node['bookid']),
     "_source" : node
     }
     for node in nodes
