@@ -32,7 +32,7 @@ es = Elasticsearch(scheme="http")
     #     _id = node['bookid']
     #     es.index(index='books',doc_type='external',id=_id,body=node)
 
-dirpath = "data/"
+dirpath = "data/json_files_final"
 
 nodes = merge_json_files(dirpath)
 
