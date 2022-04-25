@@ -1,6 +1,5 @@
 import json
 
-from sympy import pprint_use_unicode
 from elasticsearch import Elasticsearch, helpers
 
 
