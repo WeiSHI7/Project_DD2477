@@ -16,7 +16,7 @@ def merge_json_files(dirpath):
             filename = dirpath + "/" + filename
             with open(filename, "r") as filejson:
                 nodes_in = json.load(filejson)
-                nodes = nodes | nodes_in
+                nodes = dict(nodes,**nodes_in)
     return nodes
 
 
