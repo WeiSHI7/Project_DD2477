@@ -20,12 +20,12 @@ def merge_json_files(dirpath):
     return nodes
 
 
-# filepath = "data/books_information_1.json"
+filepath = "data/json_files_final/books_information_1.json"
 
 es = Elasticsearch(scheme="http", timeout=150)
 
-# with open(filepath, "r") as filejson:
-#     nodes = json.load(filejson)
+with open(filepath, "r") as filejson:
+    nodes = json.load(filejson)
 
 
     # for node in nodes:
@@ -34,7 +34,7 @@ es = Elasticsearch(scheme="http", timeout=150)
 
 dirpath = "data/json_files_final"
 
-nodes = merge_json_files(dirpath)
+# nodes = merge_json_files(dirpath)
 
 actions = [
 {
