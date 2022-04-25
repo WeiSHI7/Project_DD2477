@@ -22,7 +22,7 @@ with open(filepath, "r") as filejson:
     "_id" : node['bookid'],
     "_source" : node
     }
-    for node in nodes
+    for node in nodes.values()
     ]
 
 helpers.bulk(es,actions)
