@@ -42,3 +42,4 @@ if __name__ == "__main__":
 
     urls = load_urls(urls_file)
     write_data(data_file, failed_file, urls)
+
