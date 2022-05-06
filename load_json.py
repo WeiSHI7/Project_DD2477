@@ -6,6 +6,12 @@ from elasticsearch import Elasticsearch, helpers
 import json
 import os
 
+ELASTIC_USER = os.getenv("ELASTIC_USER")
+ELASTIC_PWD = os.getenv("ELASTIC_PWD")
+
+if ELASTIC_USER is None or ELASTIC_PWD is None:
+    raise Exception("ELASTIC_USER or ELASTIC_PWD not set")
+
 
 def merge_json_files(dirpath):
     directory = os.fsencode(dirpath)
@@ -19,31 +25,31 @@ def merge_json_files(dirpath):
                 nodes = dict(nodes,**nodes_in)
     return nodes
 
+client = Elasticsearch(
+    "https://localhost:9200",
+    ca_certs="../http_ca.crt",
+    basic_auth=(ELASTIC_USER, ELASTIC_PWD)
+)
 
-filepath = "data/json_files_final/books_information_failed_2.json"
+doc_count = 0
 
-es = Elasticsearch(scheme="http", timeout=150)
+for i in range(1, 11):
+    filepath = f"data/json_files_final/books_information_{i}.json"
 
-with open(filepath, "r") as filejson:
-    nodes = json.load(filejson)
+    with open(filepath, "r") as filejson:
+        nodes = json.load(filejson)
 
+    for k in nodes.keys():
+        nodes[k]["genres"] = ", ".join(nodes[k]["genres"])
 
-    # for node in nodes:
-    #     _id = node['bookid']
-    #     es.index(index='books',doc_type='external',id=_id,body=node)
+    body = []
 
-dirpath = "data/json_files_final"
+    for node in nodes.values():
+        body.append({"index": {"_index": "books", "_id": node["bookid"]}})
+        body.append({"fields": node})
 
-# nodes = merge_json_files(dirpath)
+    res = client.bulk(body=body)
 
-actions = [
-{
-"_index" : "books_goodreads",
-"_type" : "book",
-"_id" : node['bookid'],
-"_source" : node
-}
-for node in nodes.values()
-]
+    doc_count += len(nodes)
 
-helpers.bulk(es,actions)
+    print(f"Indexed {doc_count} documents")
