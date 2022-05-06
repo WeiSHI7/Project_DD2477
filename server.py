@@ -65,8 +65,9 @@ def search_books_by_title(title):
     search_result = es_client.search(index="books", 
         body={
             "query": {
-                "match": {
-                    "fields.title": title
+                "query_string": {
+                    "query": title,
+                    "fields": ["fields.title", "fields.author"]
                 }
             }
         }
@@ -106,16 +107,25 @@ def index():
 
 @app.route("/books")
 def get_books():
-    res = es_client.search(index="books", body={"query": {"match_all": {}}})
+    req = request.get_json(silent=True)
+    res = None
+    books = None
 
-    books = []
+    if req is not None:
+        if "title" in req:
+            books = search_books_by_title(req["title"])
 
-    if "hits" in res:
-        if "hits" in res["hits"]:
-            for hit in res["hits"]["hits"]:
-                book = create_book_from_hit(hit)
-                books.append(book)
-                cached_books[book["id"]] = book
+    if books is None:
+        res = es_client.search(index="books", body={"query": {"match_all": {}}})
+
+        books = []
+
+        if "hits" in res:
+            if "hits" in res["hits"]:
+                for hit in res["hits"]["hits"]:
+                    book = create_book_from_hit(hit)
+                    books.append(book)
+                    cached_books[book["id"]] = book
 
 
     return json.dumps(books)
