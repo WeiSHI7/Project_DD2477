@@ -1,0 +1,10 @@
+<div *ngIf="this.recommendations.length <= 0 && this.nReadBooks > 0">
+    <h2>past reads</h2>
+    <book-list [books]="this.readBooks" [extended]="false"></book-list>
+</div>
+<div *ngIf="this.recommendations.length > 0">
+    <h2>recommendations</h2>
+    <button mat-raised-button color="primary" (click)="onRetryButtonClick()">Retry</button>
+    <br />
+    <book-list [books]="this.recommendations"></book-list>
+</div>

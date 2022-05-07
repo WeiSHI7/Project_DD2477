@@ -1,15 +1,19 @@
 import os
 import json
 from flask import Flask, request
+from flask_cors import CORS
 from elasticsearch import Elasticsearch
 
 ELASTIC_USER = os.getenv("ELASTIC_USER")
 ELASTIC_PWD = os.getenv("ELASTIC_PWD")
+RECOMMENDED_BOOKS_COUNT = 3
 
 if ELASTIC_USER is None or ELASTIC_PWD is None:
     raise Exception("ELASTIC_USER or ELASTIC_PWD not set")
 
 app = Flask(__name__)
+CORS(app)
+
 es_client = Elasticsearch(
     "https://localhost:9200",
     ca_certs="../http_ca.crt",
@@ -107,13 +111,12 @@ def index():
 
 @app.route("/books")
 def get_books():
-    req = request.get_json(silent=True)
+    query = request.args.get("q")
     res = None
     books = None
 
-    if req is not None:
-        if "title" in req:
-            books = search_books_by_title(req["title"])
+    if query is not None:
+        books = search_books_by_title(query)
 
     if books is None:
         res = es_client.search(index="books", body={"query": {"match_all": {}}})
@@ -139,7 +142,7 @@ def get_book(id):
     else:
         return "Book not found", 404
 
-@app.route("/recommendations")
+@app.route("/recommendations", methods=["POST"])
 def get_recommendations():
     req = request.get_json()
     read_books = search_books_by_ids(req["read_books"])
@@ -182,9 +185,14 @@ def get_recommendations():
     res = es_client.search(index="books", body=body)
 
     recommended_ids = []
+    recommended_count = 0;
+
     for hit in res["hits"]["hits"]:
         if hit["_id"] not in read_ids:
             recommended_ids.append(hit["_id"])
+            recommended_count += 1
+            if recommended_count == RECOMMENDED_BOOKS_COUNT:
+                break
 
     return json.dumps(recommended_ids)
 

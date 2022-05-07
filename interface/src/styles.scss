@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin-left: 10px; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-card-content, .mat-card-title, .mat-card-subtitle {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}

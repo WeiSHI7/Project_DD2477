@@ -1,0 +1,16 @@
+<h1> Book Recommendation </h1>
+
+<book-recommendation 
+  [readBooks]="this.readBooks" 
+  [nReadBooks]="this.nReadBooks"
+  (onRetry)="onRetryRecommendation()" 
+  (onFinished)="onFinishedRecommendation()">
+</book-recommendation>
+<div *ngIf="!this.isRecommendationDone">
+  <mat-divider></mat-divider>
+  <mat-form-field>
+    <input matInput #search_bar> 
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="onSearch(search_bar.value)">Search</button>
+  <book-search [query]="this.searchQuery" (onBookSelected)="onBookSelected($event)"></book-search>
+</div>

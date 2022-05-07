@@ -1,0 +1,18 @@
+<div *ngFor="let book of this.books">
+    <mat-card>
+        <mat-card-title>{{book.title}}</mat-card-title>
+        <mat-card-subtitle>{{book.author}}</mat-card-subtitle>
+        <div *ngIf="this.extended">
+            <mat-card-content>
+                {{book.description}}
+            </mat-card-content>
+            <mat-chip-list>
+                <mat-chip *ngFor="let genre of book.genres">{{genre}}</mat-chip>
+            </mat-chip-list>
+            <mat-card-actions>
+                <button *ngIf="this.readButtonEnabled" (click)="this.onBookSelected.emit(book)" mat-button color="primary">I've read!</button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+    <br />
+</div>
