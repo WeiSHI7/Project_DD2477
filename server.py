@@ -22,6 +22,12 @@ es_client = Elasticsearch(
 
 cached_books = {}
 
+def save_recommendation_csv(books):
+    import pandas as pd
+    result = pd.DataFrame(books, columns=["title", "author", "description", "genres"])
+
+    result.to_csv("recommendations.csv")
+
 def create_book_from_hit(hit):
     hit_info = hit["_source"]["fields"]
 
@@ -29,7 +35,7 @@ def create_book_from_hit(hit):
         "id": hit_info['bookid'],
         "title": hit_info['title'],
         "author": hit_info['author'],
-        "description": hit_info['description'],
+        "description": hit_info['description'].split("\n")[1].strip(),
         "genres": hit_info['genres']
     }
 
@@ -148,6 +154,7 @@ def get_recommendations():
     read_books = search_books_by_ids(req["read_books"])
 
     body = {
+        "size": RECOMMENDED_BOOKS_COUNT + len(read_books),
         "query": {
             "bool": {
             "should": [
@@ -185,14 +192,14 @@ def get_recommendations():
     res = es_client.search(index="books", body=body)
 
     recommended_ids = []
-    recommended_count = 0;
+    # recommended_books = []
 
     for hit in res["hits"]["hits"]:
         if hit["_id"] not in read_ids:
             recommended_ids.append(hit["_id"])
-            recommended_count += 1
-            if recommended_count == RECOMMENDED_BOOKS_COUNT:
-                break
+    #         recommended_books.append(create_book_from_hit(hit))
+    
+    # save_recommendation_csv(recommended_books)
 
     return json.dumps(recommended_ids)
 
