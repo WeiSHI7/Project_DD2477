@@ -9,14 +9,14 @@ export class BookService {
             res["id"],
             res["title"],
             res["author"],
-            res["description"].split("\n")[1].trim(),
+            res["description"],
             res["genres"].split(",").map((genre: string) => genre.trim()).filter((genre: string) => genre.length > 0)
         )
     }
 
     async getBook(id: string): Promise<Book> {
         return new Promise<Book>((resolve, reject) => {
-            this.http.get(`http://127.0.0.1:5000/books/${id}`)
+            this.http.get(`http://127.0.0.1:5000/books/${id}`, {headers: {"Access-Control-Allow-Origin": "*"}})
                 .subscribe(
                     (data: any) => {
                         resolve(this.createBook(data));
@@ -27,7 +27,7 @@ export class BookService {
 
     async searchBooks(query: string): Promise<Book[]> {
         return new Promise<Book[]>((resolve, reject) => {
-            this.http.get(`http://127.0.0.1:5000/books?q=${query}`)
+            this.http.get(`http://127.0.0.1:5000/books?q=${query}`, {headers: {"Access-Control-Allow-Origin": "*"}})
                 .subscribe(
                     data => {
                         console.log(data);
@@ -42,7 +42,10 @@ export class BookService {
 
     async getRecommendations(read_books_ids: string[]): Promise<Book[]> {
         return new Promise<Book[]>((resolve, reject) => {
-            this.http.post(`http://127.0.0.1:5000/recommendations`, { "read_books": read_books_ids })
+            this.http.post(`http://127.0.0.1:5000/recommendations`, 
+                {"read_books": read_books_ids},
+                {headers: { "Access-Control-Allow-Origin": "*"}}
+            )
                 .subscribe(
                     data => {
                         let books: Book[] = [];

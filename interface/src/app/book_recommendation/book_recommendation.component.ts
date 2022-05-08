@@ -8,7 +8,7 @@ import { BookService } from "../book/book.service";
     styleUrls: ["./book_recommendation.component.scss"],
     providers: [BookService]
 })
-export class BookRecommendationComponent implements OnChanges {
+export class BookRecommendationComponent {
     @Input() readBooks!: Book[];
     @Input() nReadBooks!: number;
 
@@ -17,13 +17,11 @@ export class BookRecommendationComponent implements OnChanges {
     @Output() onFinished = new EventEmitter<void>();
     @Output() onRetry = new EventEmitter<void>();
 
-    ngOnChanges(_changes: SimpleChanges): void {
-        if (this.readBooks && this.readBooks.length == 3) {
-            this.bookService.getRecommendations(this.readBooks.map(book => book.id)).then(books => {
-                this.recommendations = books;
-                this.onFinished.emit();
-            });
-        }
+    onRecommendButtonClick() {
+        this.bookService.getRecommendations(this.readBooks.map(book => book.id)).then(books => {
+            this.recommendations = books;
+            this.onFinished.emit();
+        });
     }
 
     onRetryButtonClick() {
