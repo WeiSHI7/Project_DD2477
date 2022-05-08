@@ -2,12 +2,9 @@
 
 Project for DD2477
 
-#### Google docs:
-https://docs.google.com/document/d/1NM5Qjl-u9JclvHjXS2VGdY3qW_E4FfU4svRt1jC_tnc/edit
-
 ### Running the Program
 
-The pogram is composed of 3 modules: the Elastic Search instance, the recommendation server and the interface.
+The program is composed of 3 modules: the Elastic Search instance, the recommendation server and the interface.
 Once all the modules are up and running, it is expected that the search is performed with no aditional problems.
 
 #### Elastic Search
