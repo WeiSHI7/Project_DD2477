@@ -4,12 +4,15 @@ Project for DD2477
 
 ### Data Collection
 
-#### Web scraping
+#### Web Scraping
 
 First, collect and write the target urls into a file with URLScraper.py. Specify the Goodreads url of book list in the file and saved file path, then run ```python URLScraper.py```.
 
-Second, collect data based on url files saved by the former step. In writetofiles.py, specify the saved url files in the last step, the file path to save the book data, and a file path that records the failed urls. Then run ```python writetofiles.py```. Again specify the failed urls file as the saved url file, a file path to save data, and a new failed urls file path. Then run ```python writetofiles.py```. Repeat until there are no failed urls.
+Second, collect data based on url files saved by the former step. In writetofiles.py, specify the saved url files in the last step, the file path to save the book data, and a file path that records the failed urls. Then run ```python writetofiles.py```. Again specify the failed urls file as the saved url file, a file path to save data, and a new failed urls file path. Then run ```python writetofiles.py```. Repeat until there are no failed urls. The data will be stored in json format.
 
+#### Load Data to Elasticsearch
+
+Specify the directory path of the data in load_json.py, run ```python load_json.py```
 
 ### Running the Program
 
